@@ -61,12 +61,19 @@ typedef struct Node{
     struct Node *next;
 }Node;
 
-Node *createNode(Node** temp, int data) {
-         Node *newNode = (Node*)malloc(sizeof(Node));
+void createNode(Node** temp, int data) {
+        Node *newNode = (Node*)malloc(sizeof(Node));
         newNode -> data = data;
         newNode -> next = NULL;
 
         *temp = newNode;
+}
+
+void insertAtBegin(Node** head, int data) {
+    Node *firstNode = (Node*)malloc(sizeof(Node));
+    firstNode->data = data;
+    firstNode->next = *head;
+    *head = firstNode;
 }
 
 void insertAtEnd(Node* temp, int data) {
@@ -80,9 +87,11 @@ void insertAtEnd(Node* temp, int data) {
     temp-> next= lastNode;
 }
 
+
+
 void display(Node* temp){
     while(temp != NULL) {
-        printf("%d ", temp->data);
+        printf("%d\n", temp->data);
         temp = temp->next;
     }
 }
@@ -93,6 +102,11 @@ int main() {
     Node *head = NULL;
     createNode(&head,4);
     display(head);
+    insertAtEnd(head,7);
+
+    insertAtBegin(&head,40);
+    display(head);
 
     return 0;
 }
+
