@@ -87,6 +87,20 @@ void insertAtEnd(Node* temp, int data) {
     temp-> next= lastNode;
 }
 
+void insertAtMiddle(Node *temp, int data, int position) {
+    Node* middle = (Node*)malloc(sizeof(Node));
+    middle->data = data;
+    int i=1;
+    Node* previous = NULL;
+    while(i<position) {
+        previous = temp;
+        temp = temp->next;
+        i++;
+    }
+    previous->next = middle;
+    middle->next = temp;
+}
+
 
 
 void display(Node* temp){
@@ -99,14 +113,15 @@ void display(Node* temp){
 
 int main() {
 
+
     Node *head = NULL;
     createNode(&head,4);
-    display(head);
     insertAtEnd(head,7);
-
     insertAtBegin(&head,40);
     display(head);
+    insertAtMiddle(head,33,2);
 
     return 0;
 }
+
 
