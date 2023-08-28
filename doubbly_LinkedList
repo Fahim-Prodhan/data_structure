@@ -1,0 +1,106 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct Student{
+    char name[20];\
+    int age;
+    float height;
+}Student;
+
+typedef struct Node{
+    Student data;
+    struct Node* next;
+    struct Node* prev;
+}Node;
+
+Node *head;
+
+void display() {
+    Node *temp = head;
+    if(head == NULL) {
+        printf("Linked List is Empty\n");
+        return;
+    }
+
+    while(temp !=NULL){
+        printf("%s\t%d\t%0.2f", temp->data.name,temp->data.age, temp->data.height);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+void reverseDisplay() {
+    Node *temp = head;
+    if(head == NULL) {
+        printf("Linked List is Empty\n");
+        return;
+    }
+    while(temp !=NULL){
+        printf("%d ", temp->data);
+        temp = temp->prev;
+    }
+    printf("NULL\n");
+}
+
+//creating new node
+Node* getNewNode(Student x) {
+    Node *newNode = (Node*) malloc(sizeof(Node));
+    newNode->data = x;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    return newNode;
+
+}
+
+void insertAtEnd(Student data) {
+    Node* lastNode = getNewNode(data);
+    lastNode->data = data;
+    if(head == NULL) {
+        head = lastNode;
+        return;
+    }
+
+    Node *temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    temp->next = lastNode;
+    lastNode->prev = temp;
+}
+void insertAtBegin(Student data) {
+    Node* firstNode = getNewNode(data);
+    firstNode->data = data;
+    if(head == NULL) {
+        head = firstNode;
+        return;
+    }
+
+    firstNode->next = head;
+    head->prev = firstNode;
+    head = firstNode;
+}
+
+
+int main() {
+
+    int size;
+    Student student;
+
+    printf("Enter Student Number: ");
+    scanf("%d", &size);
+    getchar();
+
+    for(int i = 0; i<size; i++) {
+        scanf("%s",student.name);
+        getchar();
+        scanf("%d",&student.age);
+        getchar();
+        scanf("%f",&student.height);
+        getchar();
+    }
+
+    insertAtEnd(student);
+    display();
+
+    return 0;
+}
+
