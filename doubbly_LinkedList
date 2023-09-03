@@ -12,7 +12,12 @@ typedef struct Node{
     struct Node* prev;
 }Node;
 
-Node *head;
+Node *head=NULL;
+
+void clear_buffer() {
+    char ch;
+    while((ch = getchar()) != '\n');
+}
 
 void display() {
     Node *temp = head;
@@ -22,7 +27,7 @@ void display() {
     }
 
     while(temp !=NULL){
-        printf("%s\t%d\t%0.2f", temp->data.name,temp->data.age, temp->data.height);
+        printf("%s\t%d\t%0.2f\n", temp->data.name,temp->data.age, temp->data.height);
         temp = temp->next;
     }
     printf("NULL\n");
@@ -35,7 +40,7 @@ void reverseDisplay() {
         return;
     }
     while(temp !=NULL){
-        printf("%d ", temp->data);
+        printf("%d ", temp->data.name,temp->data.age, temp->data.height);
         temp = temp->prev;
     }
     printf("NULL\n");
@@ -87,20 +92,23 @@ int main() {
 
     printf("Enter Student Number: ");
     scanf("%d", &size);
-    getchar();
+    clear_buffer();
 
     for(int i = 0; i<size; i++) {
-        scanf("%s",student.name);
-        getchar();
+        printf("Enter Student Name: ");
+        scanf("%[^\n]s",student.name);
+        clear_buffer();
+        printf("Enter Student Age: ");
         scanf("%d",&student.age);
-        getchar();
+        clear_buffer();
+        printf("Enter Student Height: ");
         scanf("%f",&student.height);
-        getchar();
+        clear_buffer();
+        insertAtEnd(student);
     }
 
-    insertAtEnd(student);
+
     display();
 
     return 0;
 }
-
